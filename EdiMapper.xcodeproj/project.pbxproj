@@ -62,12 +62,12 @@
 		F44B35BD1EF1D4090032ECA1 /* EdiMapper */ = {
 			isa = PBXGroup;
 			children = (
-				F44B35BE1EF1D4090032ECA1 /* AppDelegate.swift */,
-				F44B35C01EF1D4090032ECA1 /* ViewController.swift */,
 				F44B35C71EF1D4090032ECA1 /* Info.plist */,
+				F44B35BE1EF1D4090032ECA1 /* AppDelegate.swift */,
 				F44B35CE1EF1D4F10032ECA1 /* EdiToXml.swift */,
 				F44B35D01EF1D97E0032ECA1 /* XmlWriter.swift */,
 				F44B35D21EF1D9CB0032ECA1 /* Utils.swift */,
+				F44B35C01EF1D4090032ECA1 /* ViewController.swift */,
 				F44B35C41EF1D4090032ECA1 /* Main.storyboard */,
 				F44B35C21EF1D4090032ECA1 /* Assets.xcassets */,
 				F44B35D61EF1EAE60032ECA1 /* Maps */,
