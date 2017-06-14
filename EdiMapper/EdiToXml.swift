@@ -22,18 +22,18 @@ class EdiToXml {
     let mandatory  = true
     let optional   = false
 
-    var timeStamp  = ""
-    var endOfFile  = false
-    var ediContent = ""
-    var ediLines   = [String]()
-    var separator  = ""
-    var terminator = ""
+    var timeStamp         = ""
+    var endOfFile         = false
+    var ediContent        = ""
+    var ediLines          = [String]()
+    var separator         = ""
+    var terminator        = ""
     var currentSegment    = ""
     var currentSegmentId  = ""
     var previousSegmentId = ""
-    var segmentCounter =  0
-    var currentLine    = -1
-    var linesCount     =  0
+    var segmentCounter    =  0
+    var currentLine       = -1
+    var linesCount        =  0
 
     var writer = XmlWriter()
     
