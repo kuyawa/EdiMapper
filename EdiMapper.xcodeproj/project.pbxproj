@@ -11,15 +11,24 @@
 		F44B35C11EF1D4090032ECA1 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F44B35C01EF1D4090032ECA1 /* ViewController.swift */; };
 		F44B35C31EF1D4090032ECA1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F44B35C21EF1D4090032ECA1 /* Assets.xcassets */; };
 		F44B35C61EF1D4090032ECA1 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F44B35C41EF1D4090032ECA1 /* Main.storyboard */; };
+		F44B35CF1EF1D4F10032ECA1 /* EdiToXml.swift in Sources */ = {isa = PBXBuildFile; fileRef = F44B35CE1EF1D4F10032ECA1 /* EdiToXml.swift */; };
+		F44B35D11EF1D97E0032ECA1 /* XmlWriter.swift in Sources */ = {isa = PBXBuildFile; fileRef = F44B35D01EF1D97E0032ECA1 /* XmlWriter.swift */; };
+		F44B35D31EF1D9CB0032ECA1 /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = F44B35D21EF1D9CB0032ECA1 /* Utils.swift */; };
+		F44B35D51EF1E7E30032ECA1 /* Map210v4010.swift in Sources */ = {isa = PBXBuildFile; fileRef = F44B35D41EF1E7E30032ECA1 /* Map210v4010.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		F44B35BB1EF1D4090032ECA1 /* EdiMapper.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = EdiMapper.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		F44B35BE1EF1D4090032ECA1 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		F44B35BE1EF1D4090032ECA1 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; wrapsLines = 0; };
 		F44B35C01EF1D4090032ECA1 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		F44B35C21EF1D4090032ECA1 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		F44B35C51EF1D4090032ECA1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		F44B35C71EF1D4090032ECA1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		F44B35CD1EF1D4700032ECA1 /* ToDo.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = ToDo.txt; sourceTree = "<group>"; };
+		F44B35CE1EF1D4F10032ECA1 /* EdiToXml.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EdiToXml.swift; sourceTree = "<group>"; };
+		F44B35D01EF1D97E0032ECA1 /* XmlWriter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XmlWriter.swift; sourceTree = "<group>"; };
+		F44B35D21EF1D9CB0032ECA1 /* Utils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
+		F44B35D41EF1E7E30032ECA1 /* Map210v4010.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Map210v4010.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -36,6 +45,7 @@
 		F44B35B21EF1D4090032ECA1 = {
 			isa = PBXGroup;
 			children = (
+				F44B35CD1EF1D4700032ECA1 /* ToDo.txt */,
 				F44B35BD1EF1D4090032ECA1 /* EdiMapper */,
 				F44B35BC1EF1D4090032ECA1 /* Products */,
 			);
@@ -57,6 +67,10 @@
 				F44B35C21EF1D4090032ECA1 /* Assets.xcassets */,
 				F44B35C41EF1D4090032ECA1 /* Main.storyboard */,
 				F44B35C71EF1D4090032ECA1 /* Info.plist */,
+				F44B35CE1EF1D4F10032ECA1 /* EdiToXml.swift */,
+				F44B35D41EF1E7E30032ECA1 /* Map210v4010.swift */,
+				F44B35D01EF1D97E0032ECA1 /* XmlWriter.swift */,
+				F44B35D21EF1D9CB0032ECA1 /* Utils.swift */,
 			);
 			path = EdiMapper;
 			sourceTree = "<group>";
@@ -133,7 +147,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F44B35D51EF1E7E30032ECA1 /* Map210v4010.swift in Sources */,
+				F44B35D31EF1D9CB0032ECA1 /* Utils.swift in Sources */,
+				F44B35D11EF1D97E0032ECA1 /* XmlWriter.swift in Sources */,
 				F44B35C11EF1D4090032ECA1 /* ViewController.swift in Sources */,
+				F44B35CF1EF1D4F10032ECA1 /* EdiToXml.swift in Sources */,
 				F44B35BF1EF1D4090032ECA1 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

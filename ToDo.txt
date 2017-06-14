@@ -1,0 +1,26 @@
+EDI MAPPER
+
+- Design document flow
+
+Inbox
+Outbox
+Sent
+Received
+Trash
+Acknowledgments
+Failures
+
+
+Inbound:
+- inbound folder as listener
+    everything dropped here will get parsed, validated and converted to xml, then moved to inbox folder
+- outbound folder as listener
+    everything dropped there gets parsed, found receiver and sent
+
+API: api.example.com/mailbox/
+
+let sender   = "SuperMart Corp"
+let receiver = "api.example.com/mailbox/sales"
+let subject  = "Purchase Order #123456"
+let content  = "xxx"
+mail.send(receiver, subject, content)
