@@ -14,13 +14,16 @@
 		F44B35CF1EF1D4F10032ECA1 /* EdiToXml.swift in Sources */ = {isa = PBXBuildFile; fileRef = F44B35CE1EF1D4F10032ECA1 /* EdiToXml.swift */; };
 		F44B35D11EF1D97E0032ECA1 /* XmlWriter.swift in Sources */ = {isa = PBXBuildFile; fileRef = F44B35D01EF1D97E0032ECA1 /* XmlWriter.swift */; };
 		F44B35D31EF1D9CB0032ECA1 /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = F44B35D21EF1D9CB0032ECA1 /* Utils.swift */; };
-		F44B35D71EF1EAE60032ECA1 /* Maps in Resources */ = {isa = PBXBuildFile; fileRef = F44B35D61EF1EAE60032ECA1 /* Maps */; };
+		F44B35DE1EF1FF650032ECA1 /* Map210v4010.swift in Sources */ = {isa = PBXBuildFile; fileRef = F44B35DD1EF1FF650032ECA1 /* Map210v4010.swift */; };
+		F4AA99491EF305C5005BBB45 /* Map810v4010.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4AA99481EF305C5005BBB45 /* Map810v4010.swift */; };
+		F4AA994C1EF31956005BBB45 /* Sample210v4010.txt in Resources */ = {isa = PBXBuildFile; fileRef = F4AA994B1EF31956005BBB45 /* Sample210v4010.txt */; };
+		F4AA994E1EF31A2E005BBB45 /* Sample810v4010.txt in Resources */ = {isa = PBXBuildFile; fileRef = F4AA994D1EF31A2E005BBB45 /* Sample810v4010.txt */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		F44B35BB1EF1D4090032ECA1 /* EdiMapper.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = EdiMapper.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F44B35BE1EF1D4090032ECA1 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; wrapsLines = 0; };
-		F44B35C01EF1D4090032ECA1 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		F44B35C01EF1D4090032ECA1 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; wrapsLines = 0; };
 		F44B35C21EF1D4090032ECA1 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		F44B35C51EF1D4090032ECA1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		F44B35C71EF1D4090032ECA1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -28,7 +31,10 @@
 		F44B35CE1EF1D4F10032ECA1 /* EdiToXml.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EdiToXml.swift; sourceTree = "<group>"; };
 		F44B35D01EF1D97E0032ECA1 /* XmlWriter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XmlWriter.swift; sourceTree = "<group>"; };
 		F44B35D21EF1D9CB0032ECA1 /* Utils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
-		F44B35D61EF1EAE60032ECA1 /* Maps */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Maps; sourceTree = "<group>"; };
+		F44B35DD1EF1FF650032ECA1 /* Map210v4010.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Map210v4010.swift; sourceTree = "<group>"; };
+		F4AA99481EF305C5005BBB45 /* Map810v4010.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Map810v4010.swift; sourceTree = "<group>"; };
+		F4AA994B1EF31956005BBB45 /* Sample210v4010.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Sample210v4010.txt; sourceTree = "<group>"; };
+		F4AA994D1EF31A2E005BBB45 /* Sample810v4010.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Sample810v4010.txt; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -70,9 +76,28 @@
 				F44B35C01EF1D4090032ECA1 /* ViewController.swift */,
 				F44B35C41EF1D4090032ECA1 /* Main.storyboard */,
 				F44B35C21EF1D4090032ECA1 /* Assets.xcassets */,
-				F44B35D61EF1EAE60032ECA1 /* Maps */,
+				F44B35DC1EF1FF650032ECA1 /* Maps */,
+				F4AA994A1EF31956005BBB45 /* Samples */,
 			);
 			path = EdiMapper;
+			sourceTree = "<group>";
+		};
+		F44B35DC1EF1FF650032ECA1 /* Maps */ = {
+			isa = PBXGroup;
+			children = (
+				F44B35DD1EF1FF650032ECA1 /* Map210v4010.swift */,
+				F4AA99481EF305C5005BBB45 /* Map810v4010.swift */,
+			);
+			path = Maps;
+			sourceTree = "<group>";
+		};
+		F4AA994A1EF31956005BBB45 /* Samples */ = {
+			isa = PBXGroup;
+			children = (
+				F4AA994B1EF31956005BBB45 /* Sample210v4010.txt */,
+				F4AA994D1EF31A2E005BBB45 /* Sample810v4010.txt */,
+			);
+			path = Samples;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -135,8 +160,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F4AA994C1EF31956005BBB45 /* Sample210v4010.txt in Resources */,
+				F4AA994E1EF31A2E005BBB45 /* Sample810v4010.txt in Resources */,
 				F44B35C31EF1D4090032ECA1 /* Assets.xcassets in Resources */,
-				F44B35D71EF1EAE60032ECA1 /* Maps in Resources */,
 				F44B35C61EF1D4090032ECA1 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -148,6 +174,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F44B35DE1EF1FF650032ECA1 /* Map210v4010.swift in Sources */,
+				F4AA99491EF305C5005BBB45 /* Map810v4010.swift in Sources */,
 				F44B35D31EF1D9CB0032ECA1 /* Utils.swift in Sources */,
 				F44B35D11EF1D97E0032ECA1 /* XmlWriter.swift in Sources */,
 				F44B35C11EF1D4090032ECA1 /* ViewController.swift in Sources */,
@@ -309,6 +337,7 @@
 				F44B35CC1EF1D4090032ECA1 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

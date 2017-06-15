@@ -1,5 +1,13 @@
 EDI MAPPER
 
+- Use stack for xml generation
+  open group: add to stack / close group: pop from stack
+
+- if file in inbox folder
+  - read, parse, return nodes
+  - then convert to xml, json, yaml or anything
+  - then save
+
 - Design document flow
 
 Inbox

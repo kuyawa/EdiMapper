@@ -35,20 +35,29 @@ class EdiToXml {
     var currentLine       = -1
     var linesCount        =  0
 
+    var tagStack = [String]()
     var writer = XmlWriter()
     
-    func Load(fileName: String) -> Bool {
+    @discardableResult
+    func Load(_ url: URL) -> Bool {
+        let fileName = url.path
         if !Filer.exists(fileName) { return false }
-        self.ediContent = Filer.toString(fileName)
+        self.ediContent = Filer.toString(url)
         let xmlFileName = Filer.setExtension(fileName, "xml")
         
         // Check first segment ISA
-        if self.ediContent.substr(0,3) != "ISA" { return false }
+        if self.ediContent[0,3] != "ISA" {
+            LogError("ISA segment required!")
+            return false
+        }
         
         // Get element separator and segment terminator
         self.separator  = self.getSeparator()
         self.terminator = self.getTerminator()
-        if self.terminator == "" { return false }
+        if self.terminator == "" {
+            LogError("Terminator required!")
+            return false
+        }
         
         // Split content in lines per terminator
         self.ediLines   = self.ediContent.components(separatedBy: self.terminator)
@@ -71,12 +80,12 @@ class EdiToXml {
         self.currentSegmentId = ""
         self.currentLine      = -1
         self.endOfFile        = false
-        self.timeStamp        = Date().format("Y/m/d H:m:s")
+        self.timeStamp        = Date().toString()
     }
     
     func getSeparator() -> String {
         if self.ediContent == "" { return "" }
-        else { return self.ediContent.substr(3,1) }
+        else { return self.ediContent[3,4] }
     }
     
     func getTerminator() -> String {
@@ -84,17 +93,17 @@ class EdiToXml {
         var end = 0
         var extract = ""
         
-        ini = self.ediContent.occurIndex(self.separator, 16) + 1
-        extract = self.ediContent.substr(ini+1, 6)     // sample 6 chars after ISA's end
+        ini = self.ediContent.locate(self.separator, 16) + 1
+        extract = self.ediContent[ini+1, ini+7]        // sample 6 chars after ISA's end
         let group = "GS"+self.separator
         end = extract.locate(group)                    // terminator ends where GS starts
         if end < 0 { return "" }                       // GS segment not present, file unreadable.
         
-        extract = extract.substr(0, end)               // more than one char? replace with \n
-        if extract.length > 1 {
-            self.ediContent = self.ediContent.replace(extract, "\n")
-            extract = "\n"
-        }
+        extract = extract[0, end]
+        //if extract.length > 1 {
+        //    self.ediContent = self.ediContent.replace(extract, "\n")
+        //    extract = "\n"
+        //}
         
         return extract
     }
@@ -117,15 +126,19 @@ class EdiToXml {
     }
     
     func NewGroup(_ tagName: String, _ loopId: String = "") {
+        tagStack.append(tagName)
         self.writer.WriteStartElement(tagName)
         if !loopId.isEmpty {
             self.writer.WriteAttributeString("id", loopId)
         }
+        self.writer.WriteClosingBracket()
         return
     }
     
     func EndGroup() {
-        self.writer.WriteEndElement()
+        let tagName = tagStack.popLast()!
+        self.writer.WriteClosingTag(tagName)
+        //self.writer.WriteEndElement()
         return
     }
     
@@ -153,7 +166,7 @@ class EdiToXml {
     
         let position = self.currentSegment.locate(self.separator)
         if position < 0 { self.currentSegmentId = self.currentSegment.trimmed }    // Empty Line
-        else { self.currentSegmentId = self.currentSegment.substr(0,position) }
+        else { self.currentSegmentId = self.currentSegment[0, position] }
     }
     
     func ParseSegment(_ segmentId: String) {
@@ -186,12 +199,12 @@ class EdiToXml {
     
     func ReadElement(_ position: Int) -> String {
         var anyValue = ""
-        var nIni = self.currentSegment.occurIndex(self.separator, position)
-        var nEnd = self.currentSegment.occurIndex(self.separator, position+1)
+        var nIni = self.currentSegment.locate(self.separator, position)
+        var nEnd = self.currentSegment.locate(self.separator, position+1)
         
         if nIni < 0 { return "" } else { nIni += 1 }
         if nEnd < 0 { nEnd = self.currentSegment.length }
-        anyValue = self.currentSegment.substr(nIni, nEnd-nIni)
+        anyValue = self.currentSegment[nIni, nEnd]
         
         return anyValue
     }

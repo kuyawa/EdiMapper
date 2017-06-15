@@ -10,7 +10,7 @@ import Foundation
 
 /* 210 - FREIGHT INVOICE */
 
-class map210v4010: EdiToXml {
+class Map210v4010: EdiToXml {
 
     func Run() {
         NewGroup("ENVELOPE")
