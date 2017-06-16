@@ -22,7 +22,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		F41A5F231EF45E4500D4E36B /* Readme.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; name = Readme.md; path = EdiMapper/Readme.md; sourceTree = "<group>"; };
+		F41A5F251EF462FC00D4E36B /* Readme.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = Readme.md; sourceTree = "<group>"; };
 		F44B35BB1EF1D4090032ECA1 /* EdiMapper.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = EdiMapper.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F44B35BE1EF1D4090032ECA1 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; wrapsLines = 0; };
 		F44B35C01EF1D4090032ECA1 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; wrapsLines = 0; };
@@ -54,7 +54,7 @@
 		F44B35B21EF1D4090032ECA1 = {
 			isa = PBXGroup;
 			children = (
-				F41A5F231EF45E4500D4E36B /* Readme.md */,
+				F41A5F251EF462FC00D4E36B /* Readme.md */,
 				F44B35CD1EF1D4700032ECA1 /* ToDo.txt */,
 				F44B35BD1EF1D4090032ECA1 /* EdiMapper */,
 				F44B35BC1EF1D4090032ECA1 /* Products */,
