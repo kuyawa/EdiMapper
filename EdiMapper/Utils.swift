@@ -10,10 +10,6 @@ import Foundation
 
 
 class Filer {
-    static func exists(_ file: String) -> Bool {
-        return true
-    }
-    
     static func toString(_ file: String) -> String {
         let url = URL(string: file)!
         let text = try? String(contentsOf: url)
@@ -29,7 +25,13 @@ class Filer {
         try? contents.write(toFile: fileName, atomically: false, encoding: .utf8)
     }
     
+    static func exists(_ file: String) -> Bool {
+        // TODO
+        return true
+    }
+    
     static func setExtension(_ file: String, _ ext: String) -> String {
+        // TODO
         return ""
     }
 }
@@ -65,7 +67,6 @@ extension String {
     subscript (r: Range<Int>) -> String {
         let ini = index(startIndex, offsetBy: r.lowerBound)
         let end = index(startIndex, offsetBy: r.upperBound)
-        //let end = index(startIndex, offsetBy: r.upperBound - r.lowerBound) // FIX
         return self[Range(ini ..< end)]
     }
     
@@ -77,15 +78,6 @@ extension String {
 
     func substr(_ m: Int, _ n: Int) -> String {
         return self[m, n]
-    }
-    
-    func locateXXX(_ text: String, _ offset: Int = 0) -> Int {
-        if offset > length { return -1 }
-        let subtext = self[offset, length]
-        if let index = range(of: subtext, options: .literal)?.lowerBound {
-            return self.distance(from: startIndex, to: index)
-        }
-        return -1
     }
     
     func locate(_ text: String, _ occurrence: Int = 1) -> Int {
@@ -151,23 +143,6 @@ extension String {
         return self.components(separatedBy: needle).count - 1
     }
 
-    func occursOLD(_ needle: String) -> Int {
-        var offset   = 0
-        var counter  = 0
-        var position = 0
-        
-        while true {
-            position = self.locate(needle, offset)
-            if position < 0 { break }
-            else {
-                counter += 1
-                offset = position + needle.length
-            }
-        }
-        
-        return counter
-    }
-    
 }
 
 extension Date {

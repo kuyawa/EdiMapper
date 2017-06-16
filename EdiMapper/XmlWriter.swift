@@ -10,7 +10,9 @@ import Foundation
 
 class XmlWriter {
     var fileName = ""
-    var content  = ""
+    var content  = "<?xml version=\"1.0\" ?>\n"
+    var indent   = 0
+    var tab      = "    "
     
     init() {
         //
@@ -20,48 +22,39 @@ class XmlWriter {
         self.fileName = fileName
     }
     
-    func WriteStartElement(_ tag: String) {
-        //let indent = 0 // TODO: Keep track of indent
-        let line   = "<" + tag
+    func writeStartElement(_ tag: String) {
+        let line   = String(repeating: tab, count: indent) + "<" + tag
         self.content += line
-        print(line)
     }
 
-    func WriteClosingBracket() {
-        let line = ">\n"
-        self.content += line
-        print(line)
-    }
-    
-    func WriteClosingTag(_ tag: String) {
-        let line = "</\(tag)>"
-        self.content += line
-        print(line)
-    }
-    
-    func WriteEndElement() {
+    func writeEndElement() {
         let line = " />\n"
         self.content += line
-        print(line)
     }
     
-    func WriteAttributeString(_ name: String, _ value: String) {
-        let line = "\(name)=\"\(value)\""
+    func writeClosingBracket() {
+        let line = ">\n"
         self.content += line
-        print(line)
+    }
+    
+    func writeClosingTag(_ tag: String) {
+        let line = String(repeating: tab, count: indent) + "</\(tag)>\n"
+        self.content += line
+    }
+    
+    func writeAttributeString(_ name: String, _ value: String) {
+        let line = " \(name)=\"\(value)\""
+        self.content += line
     }
 
-    func Append(_ xml: String) {
+    func append(_ xml: String) {
         self.content += xml
     }
     
-    func Close() {
-        // ???
-    }
-
-    func Save() {
-        Filer.save(self.fileName, self.content)
-        print("WRITING FILE:")
+    func save() {
+        // TODO:
+        //print("Writing file...")
+        //Filer.save(self.fileName, self.content)
     }
 
 }

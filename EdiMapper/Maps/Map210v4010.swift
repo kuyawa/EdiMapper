@@ -12,147 +12,149 @@ import Foundation
 
 class Map210v4010: EdiToXml {
 
-    func Run() {
-        NewGroup("ENVELOPE")
-        Parse("ISA",mandatory)
+    override func convert() {
+        newGroup("ENVELOPE")
+        parse("ISA",mandatory)
         
-        NewGroup("GROUP")
-        Parse("GS" ,mandatory)
+        checkMandatory("GS")
+        while(currentSegmentId=="GS") {
+            newGroup("GROUP")
+            parse("GS",mandatory)
         
-        CheckMandatory("ST")
-        while(currentSegmentId=="ST") {
-            NewGroup("TRANSACTION")
-            Parse("ST",mandatory)
-            Parse("B3",mandatory)
-            Parse("C2")
-            Parse("C3")
-            Parse("ITD")
-            Parse("N9")
-            Parse("G62")
-            Parse("R3")
-            Parse("H3")
-            Parse("K1")
-            
-            while(currentSegmentId=="N1") {
-                NewGroup("LOOP","0100")
-                Parse("N1")
-                Parse("N2")
-                Parse("N3")
-                Parse("N4")
-                Parse("N9")
-                EndGroup()
-            }
-            
-            while(currentSegmentId=="N7") {
-                NewGroup("LOOP","0200")
-                Parse("N7")
-                Parse("M7")
-                EndGroup()
-            }
-
-            while(currentSegmentId=="SPO") {
-                NewGroup("LOOP","0250")
-                Parse("SPO")
-                Parse("SDQ")
-                EndGroup()
-            }
-            
-            while(currentSegmentId=="S5") {
-                NewGroup("LOOP","0300")
-                Parse("S5")
-                Parse("N9")
-                Parse("G62")
-                Parse("H3")
-
-                while(currentSegmentId=="SPO") {
-                    NewGroup("LOOP","0305")
-                    Parse("SPO")
-                    Parse("SDQ")
-                    EndGroup()
-                }
+            checkMandatory("ST")
+            while(currentSegmentId=="ST") {
+                newGroup("TRANSACTION")
+                parse("ST",mandatory)
+                parse("B3",mandatory)
+                parse("C2")
+                parse("C3")
+                parse("ITD")
+                parse("N9")
+                parse("G62")
+                parse("R3")
+                parse("H3")
+                parse("K1")
                 
                 while(currentSegmentId=="N1") {
-                    NewGroup("LOOP","0310")
-                    Parse("N1")
-                    Parse("N2")
-                    Parse("N3")
-                    Parse("N4")
-                    Parse("N9")
-                    
-                    while(currentSegmentId=="N7") {
-                        NewGroup("LOOP","0320")
-                        Parse("N7")
-                        Parse("M7")
-                        EndGroup()
-                    }
-                    EndGroup()
+                    newGroup("LOOP","0100")
+                    parse("N1")
+                    parse("N2")
+                    parse("N3")
+                    parse("N4")
+                    parse("N9")
+                    endGroup()
                 }
-                EndGroup()
-            }
-            
-            while(currentSegmentId=="LX") {
-                NewGroup("LOOP","0400")
-                Parse("LX")
-                Parse("N9")
-                Parse("POD")
-                Parse("L5")
-                Parse("H1")
-                Parse("H2")
-                Parse("L0")
-                Parse("L1")
-                Parse("L4")
-                Parse("L7")
-                Parse("K1")
                 
-                while(currentSegmentId=="SPO") {
-                    NewGroup("LOOP","0430")
-                    Parse("SPO")
-                    Parse("SDQ")
-                    EndGroup()
+                while(currentSegmentId=="N7") {
+                    newGroup("LOOP","0200")
+                    parse("N7")
+                    parse("M7")
+                    endGroup()
                 }
 
-                while(currentSegmentId=="N1") {
-                    NewGroup("LOOP","0460")
-                    Parse("N1")
-                    Parse("N2")
-                    Parse("N3")
-                    Parse("N4")
-                    Parse("N9")
-                    
-                    while(currentSegmentId=="CD3") {
-                        NewGroup("LOOP","0463")
-                        Parse("CD3")
-                        Parse("N9")
-                        Parse("H6")
-                        Parse("L9")
-                        Parse("POD")
-                        Parse("G62")
-                        EndGroup()
+                while(currentSegmentId=="SPO") {
+                    newGroup("LOOP","0250")
+                    parse("SPO")
+                    parse("SDQ")
+                    endGroup()
+                }
+                
+                while(currentSegmentId=="S5") {
+                    newGroup("LOOP","0300")
+                    parse("S5")
+                    parse("N9")
+                    parse("G62")
+                    parse("H3")
+
+                    while(currentSegmentId=="SPO") {
+                        newGroup("LOOP","0305")
+                        parse("SPO")
+                        parse("SDQ")
+                        endGroup()
                     }
+                    
+                    while(currentSegmentId=="N1") {
+                        newGroup("LOOP","0310")
+                        parse("N1")
+                        parse("N2")
+                        parse("N3")
+                        parse("N4")
+                        parse("N9")
+                        
+                        while(currentSegmentId=="N7") {
+                            newGroup("LOOP","0320")
+                            parse("N7")
+                            parse("M7")
+                            endGroup()
+                        }
+                        endGroup()
+                    }
+                    endGroup()
+                }
+                
+                while(currentSegmentId=="LX") {
+                    newGroup("LOOP","0400")
+                    parse("LX")
+                    parse("N9")
+                    parse("POD")
+                    parse("L5")
+                    parse("H1")
+                    parse("H2")
+                    parse("L0")
+                    parse("L1")
+                    parse("L4")
+                    parse("L7")
+                    parse("K1")
                     
                     while(currentSegmentId=="SPO") {
-                        NewGroup("LOOP","0465")
-                        Parse("SPO")
-                        Parse("SDQ")
-                        EndGroup()
+                        newGroup("LOOP","0430")
+                        parse("SPO")
+                        parse("SDQ")
+                        endGroup()
                     }
-                    EndGroup()
+
+                    while(currentSegmentId=="N1") {
+                        newGroup("LOOP","0460")
+                        parse("N1")
+                        parse("N2")
+                        parse("N3")
+                        parse("N4")
+                        parse("N9")
+                        
+                        while(currentSegmentId=="CD3") {
+                            newGroup("LOOP","0463")
+                            parse("CD3")
+                            parse("N9")
+                            parse("H6")
+                            parse("L9")
+                            parse("POD")
+                            parse("G62")
+                            endGroup()
+                        }
+                        
+                        while(currentSegmentId=="SPO") {
+                            newGroup("LOOP","0465")
+                            parse("SPO")
+                            parse("SDQ")
+                            endGroup()
+                        }
+                        endGroup()
+                    }
+                    endGroup()
                 }
-                EndGroup()
+                
+                parse("L3")
+                parse("SE",mandatory)
+                endGroup()
             }
-            
-            Parse("L3")
-            Parse("SE",mandatory)
-            EndGroup()
+
+            parse("GE",mandatory)
+            endGroup()
         }
         
-        Parse("GE",mandatory)
-        EndGroup()
+        parse("IEA",mandatory)
+        endGroup()
         
-        Parse("IEA",mandatory)
-        EndGroup()
-        
-        Save()
         return
     }
 }

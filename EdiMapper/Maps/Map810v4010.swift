@@ -12,88 +12,94 @@ import Foundation
 
 class Map810v4010: EdiToXml {
     
-    func Run() {
-        NewGroup("ENVELOPE")
-        Parse("ISA",mandatory)
+    override func convert() {
+        newGroup("ENVELOPE")
+        parse("ISA",mandatory)
         
-        NewGroup("GROUP")
-        Parse("GS",mandatory)
-        
-        CheckMandatory("ST")
-        while(currentSegmentId=="ST") {
-            NewGroup("TRANSACTION")
-            Parse("ST",mandatory)
-            Parse("BIG")
-            Parse("CUR")
-            Parse("REF")
+        checkMandatory("GS")
+        while(currentSegmentId=="GS") {
+            newGroup("GROUP")
+            parse("GS",mandatory)
+            
+            checkMandatory("ST")
+            while(currentSegmentId=="ST") {
+                newGroup("TRANSACTION")
+                parse("ST",mandatory)
+                parse("BIG")
+                parse("CUR")
+                parse("NTE")
+                parse("REF")
 
-            while(currentSegmentId=="N1") {
-                NewGroup("LOOP","0100")
-                Parse("N1")
-                Parse("N2")
-                Parse("N3")
-                Parse("N4")
-                Parse("N9")
-                EndGroup()
-            }
-
-            Parse("ITD")
-            Parse("DTM")
-            Parse("FOB")
-
-            while(currentSegmentId=="IT1") {
-                NewGroup("LOOP","0200")
-                Parse("IT1")
-                Parse("CTP")
-                
-                while(currentSegmentId=="PID") {
-                    NewGroup("LOOP","0300")
-                    Parse("PID")
-                    EndGroup()
+                while(currentSegmentId=="N1") {
+                    newGroup("LOOP","0100")
+                    parse("N1",optional,max:1)
+                    parse("N2")
+                    parse("N3")
+                    parse("N4")
+                    parse("N9")
+                    endGroup()
                 }
-                
-                Parse("REF")
-                //Parse("PO4")
-                
+
+                parse("ITD")
+                parse("DTM")
+                parse("FOB")
+                parse("BAL")
+                parse("PAM")
+
+                while(currentSegmentId=="IT1") {
+                    newGroup("LOOP","0200")
+                    parse("IT1",optional,max:1)
+                    parse("DTM")
+                    parse("CTP")
+                    
+                    while(currentSegmentId=="PID") {
+                        newGroup("LOOP","0300")
+                        parse("PID",optional,max:1)
+                        endGroup()
+                    }
+                    
+                    parse("REF")
+                    //parse("PO4")
+                    
+                    while(currentSegmentId=="SAC") {
+                        newGroup("LOOP","0400")
+                        parse("SAC",optional,max:1)
+                        endGroup()
+                    }
+                    
+                    while(currentSegmentId=="SLN") {
+                        newGroup("LOOP","0500")
+                        parse("SLN",optional,max:1)
+                        parse("PID")
+                        endGroup()
+                    }
+                    
+                    endGroup()
+                }
+
+                parse("TDS")
+                parse("TXI")
+                parse("CAD")
+
                 while(currentSegmentId=="SAC") {
-                    NewGroup("LOOP","0400")
-                    Parse("SAC")
-                    EndGroup()
+                    newGroup("LOOP","0600")
+                    parse("SAC",optional,max:1)
+                    endGroup()
                 }
-                
-                while(currentSegmentId=="SLN") {
-                    NewGroup("LOOP","0500")
-                    Parse("SLN")
-                    Parse("PID")
-                    EndGroup()
-                }
-                
-                EndGroup()
+
+                parse("CTT")
+                parse("ISS")
+                parse("SE",mandatory)
+                endGroup()
             }
-
-            Parse("TDS")
-            Parse("TXI")
-            Parse("CAD")
-
-            while(currentSegmentId=="SAC") {
-                NewGroup("LOOP","0400")
-                Parse("SAC")
-                EndGroup()
-            }
-
-            Parse("CTT")
-            Parse("ISS")
-            Parse("SE",mandatory)
-            EndGroup()
+        
+            parse("GE",mandatory)
+            endGroup()
         }
         
-        Parse("GE",mandatory)
-        EndGroup()
+        parse("IEA",mandatory)
+        endGroup()
         
-        Parse("IEA",mandatory)
-        EndGroup()
-        
-        Save()
         return
     }
 }

@@ -1,7 +1,8 @@
 EDI MAPPER
 
-- Use stack for xml generation
-  open group: add to stack / close group: pop from stack
+FOLDERS:
+- inbox/received: check for mail, parse files in inbox, move new files to received
+- outbox/sent: send mail, parse files in outbox, produce EDI, send to recipients
 
 - if file in inbox folder
   - read, parse, return nodes

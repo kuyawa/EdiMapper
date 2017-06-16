@@ -11,8 +11,9 @@ import Foundation
 /* USE:
  
     edi = EdiToXml()
-    edi.Convert(ediFileName, ediMapName)
-    edi.Save(xmlFileName)
+    edi.load(ediFileName)
+    edi.convert()
+    edi.save()
     print(edi.xml)
  
 */
@@ -38,147 +39,150 @@ class EdiToXml {
     var tagStack = [String]()
     var writer = XmlWriter()
     
+    var xml: String { return writer.content }
+    
     @discardableResult
-    func Load(_ url: URL) -> Bool {
+    func load(_ url: URL) -> Bool {
         let fileName = url.path
         if !Filer.exists(fileName) { return false }
-        self.ediContent = Filer.toString(url)
+        ediContent = Filer.toString(url)
         let xmlFileName = Filer.setExtension(fileName, "xml")
         
         // Check first segment ISA
-        if self.ediContent[0,3] != "ISA" {
-            LogError("ISA segment required!")
+        if ediContent[0,3] != "ISA" {
+            logError("ISA segment required!")
             return false
         }
         
         // Get element separator and segment terminator
-        self.separator  = self.getSeparator()
-        self.terminator = self.getTerminator()
-        if self.terminator == "" {
-            LogError("Terminator required!")
+        separator  = getSeparator()
+        terminator = getTerminator()
+        if terminator == "" {
+            logError("Terminator required!")
             return false
         }
         
         // Split content in lines per terminator
-        self.ediLines   = self.ediContent.components(separatedBy: self.terminator)
-        self.linesCount = self.ediLines.count
+        ediLines   = ediContent.components(separatedBy: terminator)
+        linesCount = ediLines.count
         
-        self.Initialize(xmlFileName)
-        self.NextSegment() // read first segment
+        initialize(xmlFileName)
+        nextSegment() // read first segment
         
         return true
     }
     
-    func Save() {
+    func save() {
         // TODO:
-        //self.writer.Close()
     }
     
-    func Initialize(_ fileName: String) {
-        self.writer = XmlWriter(fileName) // TODO
-        self.currentSegment   = ""
-        self.currentSegmentId = ""
-        self.currentLine      = -1
-        self.endOfFile        = false
-        self.timeStamp        = Date().toString()
+    func convert() {
+        // Implement on mapper class
+    }
+    
+    func initialize(_ fileName: String) {
+        writer = XmlWriter(fileName)
+        currentSegment   = ""
+        currentSegmentId = ""
+        currentLine      = -1
+        endOfFile        = false
+        timeStamp        = Date().toString()
     }
     
     func getSeparator() -> String {
-        if self.ediContent == "" { return "" }
-        else { return self.ediContent[3,4] }
+        if ediContent == "" { return "" }
+        else { return ediContent[3,4] }
     }
     
     func getTerminator() -> String {
         var ini = 0
         var end = 0
-        var extract = ""
+        var chars = ""
         
-        ini = self.ediContent.locate(self.separator, 16) + 1
-        extract = self.ediContent[ini+1, ini+7]        // sample 6 chars after ISA's end
-        let group = "GS"+self.separator
-        end = extract.locate(group)                    // terminator ends where GS starts
-        if end < 0 { return "" }                       // GS segment not present, file unreadable.
+        ini = ediContent.locate(separator, 16) + 1
+        chars = ediContent[ini+1, ini+7]   // sample 6 chars after ISA's end
+        let group = "GS"+separator
+        end = chars.locate(group)          // terminator ends where GS starts
+        if end < 0 { return "" }           // GS segment not present, file unreadable.
+        chars = chars[0, end]
         
-        extract = extract[0, end]
-        //if extract.length > 1 {
-        //    self.ediContent = self.ediContent.replace(extract, "\n")
-        //    extract = "\n"
-        //}
-        
-        return extract
+        return chars
     }
     
     @discardableResult
-    func Parse(_ segmentId: String, _ isMandatory: Bool = false) -> Bool {
-        if isMandatory && !self.CheckMandatory(segmentId) {
-            self.LogError("Mandatory segment: "+segmentId)
+    func parse(_ segmentId: String, _ isMandatory: Bool = false, max: Int? = nil) -> Bool {
+        if isMandatory && !checkMandatory(segmentId) {
+            logError("Mandatory segment: "+segmentId)
             return false
         }
         
-        if segmentId != self.currentSegmentId { return false }
+        if segmentId != currentSegmentId { return false }
     
-        while segmentId == self.currentSegmentId && !self.endOfFile {
-            self.ParseSegment(segmentId)
-            self.NextSegment()
+        var count = 0
+        while segmentId == currentSegmentId && !endOfFile {
+            parseSegment(segmentId)
+            nextSegment()
+            count += 1
+            if max != nil && count >= max! { break }
         }
         
         return true
     }
     
-    func NewGroup(_ tagName: String, _ loopId: String = "") {
+    func newGroup(_ tagName: String, _ loopId: String = "") {
         tagStack.append(tagName)
-        self.writer.WriteStartElement(tagName)
+        writer.writeStartElement(tagName)
         if !loopId.isEmpty {
-            self.writer.WriteAttributeString("id", loopId)
+            writer.writeAttributeString("id", loopId)
         }
-        self.writer.WriteClosingBracket()
+        writer.writeClosingBracket()
+        writer.indent += 1
         return
     }
     
-    func EndGroup() {
+    func endGroup() {
+        writer.indent -= 1
         let tagName = tagStack.popLast()!
-        self.writer.WriteClosingTag(tagName)
-        //self.writer.WriteEndElement()
+        writer.writeClosingTag(tagName)
         return
     }
     
     @discardableResult
-    func CheckMandatory(_ segmentId: String) -> Bool {
-        if segmentId == self.currentSegmentId { return true }
-    
-        self.LogError("Mandatory segment "+self.currentSegmentId+" not found")
-        while self.currentLine <= self.linesCount { self.NextSegment() }
-        self.currentSegmentId = "EOF"
-        //Error = true
+    func checkMandatory(_ segmentId: String) -> Bool {
+        if segmentId == currentSegmentId { return true }
+        logError("Mandatory segment \(currentSegmentId) not found")
+        while currentLine <= linesCount { nextSegment() }
+        currentSegmentId = "EOF"
         return false
     }
     
-    func NextSegment() {
-        self.currentLine += 1
-        if self.currentLine >= self.linesCount {
-            self.currentLine = self.linesCount
-            self.endOfFile = true
+    func nextSegment() {
+        currentLine += 1
+        if currentLine >= linesCount {
+            currentLine = linesCount
+            endOfFile = true
             return
         }
     
-        self.previousSegmentId = self.currentSegmentId
-        self.currentSegment    = self.ediLines[currentLine]
+        previousSegmentId = currentSegmentId
+        currentSegment    = ediLines[currentLine]
     
-        let position = self.currentSegment.locate(self.separator)
-        if position < 0 { self.currentSegmentId = self.currentSegment.trimmed }    // Empty Line
-        else { self.currentSegmentId = self.currentSegment[0, position] }
+        let position = currentSegment.locate(separator)
+        if position < 0 { currentSegmentId = currentSegment.trimmed }    // Empty Line
+        else { currentSegmentId = currentSegment[0, position] }
     }
     
-    func ParseSegment(_ segmentId: String) {
-        let elements = self.currentSegment.occurs(self.separator)
+    func parseSegment(_ segmentId: String) {
+        let elements = currentSegment.occurs(separator)
         var anyName  = ""
         var anyValue = ""
         
-        self.writer.WriteStartElement(segmentId)
+        writer.writeStartElement(segmentId)
         for index in 0 ..< elements {
-            anyValue = self.ReadElement(index+1)
+            anyValue = readElement(index+1)
             if anyValue == "" { continue }
         
+            // Replace xml entities
             if anyValue.locate("&")  >= 0 ||
                anyValue.locate(">")  >= 0 ||
                anyValue.locate("<")  >= 0 ||
@@ -191,25 +195,25 @@ class EdiToXml {
                 anyValue = anyValue.replace("\"","&quot;")
             }
             anyName = "e" + (index+1).string.padLeft(2, "0")
-            self.writer.WriteAttributeString(anyName,anyValue)
+            writer.writeAttributeString(anyName,anyValue)
         }
         
-        self.writer.WriteEndElement()
+        writer.writeEndElement()
     }
     
-    func ReadElement(_ position: Int) -> String {
+    func readElement(_ position: Int) -> String {
         var anyValue = ""
-        var nIni = self.currentSegment.locate(self.separator, position)
-        var nEnd = self.currentSegment.locate(self.separator, position+1)
+        var nIni = currentSegment.locate(separator, position)
+        var nEnd = currentSegment.locate(separator, position+1)
         
         if nIni < 0 { return "" } else { nIni += 1 }
-        if nEnd < 0 { nEnd = self.currentSegment.length }
-        anyValue = self.currentSegment[nIni, nEnd]
+        if nEnd < 0 { nEnd = currentSegment.length }
+        anyValue = currentSegment[nIni, nEnd]
         
-        return anyValue
+        return anyValue.trimmed
     }
     
-    func LogError(_ message: String) {
+    func logError(_ message: String) {
         print("Error: ", message)
     }
 }

@@ -18,6 +18,7 @@
 		F4AA99491EF305C5005BBB45 /* Map810v4010.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4AA99481EF305C5005BBB45 /* Map810v4010.swift */; };
 		F4AA994C1EF31956005BBB45 /* Sample210v4010.txt in Resources */ = {isa = PBXBuildFile; fileRef = F4AA994B1EF31956005BBB45 /* Sample210v4010.txt */; };
 		F4AA994E1EF31A2E005BBB45 /* Sample810v4010.txt in Resources */ = {isa = PBXBuildFile; fileRef = F4AA994D1EF31A2E005BBB45 /* Sample810v4010.txt */; };
+		F4AB622A1EF3448100121A7C /* Sample810v4010full.txt in Resources */ = {isa = PBXBuildFile; fileRef = F4AB62291EF3448100121A7C /* Sample810v4010full.txt */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,13 +29,14 @@
 		F44B35C51EF1D4090032ECA1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		F44B35C71EF1D4090032ECA1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F44B35CD1EF1D4700032ECA1 /* ToDo.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = ToDo.txt; sourceTree = "<group>"; };
-		F44B35CE1EF1D4F10032ECA1 /* EdiToXml.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EdiToXml.swift; sourceTree = "<group>"; };
+		F44B35CE1EF1D4F10032ECA1 /* EdiToXml.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EdiToXml.swift; sourceTree = "<group>"; wrapsLines = 0; };
 		F44B35D01EF1D97E0032ECA1 /* XmlWriter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XmlWriter.swift; sourceTree = "<group>"; };
 		F44B35D21EF1D9CB0032ECA1 /* Utils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
 		F44B35DD1EF1FF650032ECA1 /* Map210v4010.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Map210v4010.swift; sourceTree = "<group>"; };
 		F4AA99481EF305C5005BBB45 /* Map810v4010.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Map810v4010.swift; sourceTree = "<group>"; };
-		F4AA994B1EF31956005BBB45 /* Sample210v4010.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Sample210v4010.txt; sourceTree = "<group>"; };
-		F4AA994D1EF31A2E005BBB45 /* Sample810v4010.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Sample810v4010.txt; sourceTree = "<group>"; };
+		F4AA994B1EF31956005BBB45 /* Sample210v4010.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Sample210v4010.txt; sourceTree = "<group>"; wrapsLines = 0; };
+		F4AA994D1EF31A2E005BBB45 /* Sample810v4010.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Sample810v4010.txt; sourceTree = "<group>"; wrapsLines = 0; };
+		F4AB62291EF3448100121A7C /* Sample810v4010full.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Sample810v4010full.txt; sourceTree = "<group>"; wrapsLines = 0; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -96,6 +98,7 @@
 			children = (
 				F4AA994B1EF31956005BBB45 /* Sample210v4010.txt */,
 				F4AA994D1EF31A2E005BBB45 /* Sample810v4010.txt */,
+				F4AB62291EF3448100121A7C /* Sample810v4010full.txt */,
 			);
 			path = Samples;
 			sourceTree = "<group>";
@@ -161,6 +164,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				F4AA994C1EF31956005BBB45 /* Sample210v4010.txt in Resources */,
+				F4AB622A1EF3448100121A7C /* Sample810v4010full.txt in Resources */,
 				F4AA994E1EF31A2E005BBB45 /* Sample810v4010.txt in Resources */,
 				F44B35C31EF1D4090032ECA1 /* Assets.xcassets in Resources */,
 				F44B35C61EF1D4090032ECA1 /* Main.storyboard in Resources */,
